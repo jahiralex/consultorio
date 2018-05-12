@@ -1,0 +1,28 @@
+<h3>
+	{{tituloBarrioAdd}}
+</h3>
+
+<form #formBarrio="ngForm" (ngSubmit)="onSubmit()" class="col-lg-6" id="form-barrio">
+
+
+
+  <label>
+		Código
+		<span *ngIf="!codigo.valid && codigo.touched" class="label label-danger"> *Campo obligatorio</span>
+	</label>
+	<input type="text" #codigo="ngModel" name="codigo" [(ngModel)]="barrio.CODIGO" class="form-control" required />
+
+  <label>
+		Descripción
+		<span *ngIf="!descripcion.valid && descripcion.touched" class="label label-danger"> Campo obligatorio</span>
+	</label>
+	<input type="text" #descripcion="ngModel" name="descripcion" [(ngModel)]="barrio.DESCRIPCION" class="form-control" required />
+
+  <br/>
+	<input type="submit" value="Guardar" [disabled]="!formBarrio.form.valid" class="btn btn-success" />
+
+
+	<button type="button" class="btn btn-danger" [routerLink]="['/barrioLocalidadList', barrio.LOCALIDAD]">Cancelar</button>
+
+
+</form>

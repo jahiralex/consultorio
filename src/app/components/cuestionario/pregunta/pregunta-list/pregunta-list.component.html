@@ -1,0 +1,52 @@
+<h3>
+	{{tituloPreguntaList}}
+</h3>
+
+<div *ngIf="!preguntaList">
+	Cargando listado de Preguntas...
+</div>
+<br>
+<div *ngIf="preguntaList">
+	<div>
+		<button type="button" class="btn btn-primary" [routerLink]="['/preguntaAdd']">Insertar</button>
+		<div class="right">
+			<button type="button" class="btn btn-primary" [routerLink]="['/cuestionarioList']">Cuestionarios</button>
+			<button type="button" class="btn btn-primary" [routerLink]="['/grupoList']">Grupos</button>
+		</div>
+	</div>
+	<br>
+	<div>
+		<table class="table table-striped table-success" >
+		  <thead>
+		    <tr>
+		      <th scope="col">CÓDIGO</th>
+					<th scope="col">DESCRIPCIÓN</th>
+					<th scope="col">OBSERVACIÓN</th>
+          <th scope="col">TIPO DE RESPUESTA</th>
+          <th scope="col">ESTADO</th>
+		      <th scope="col">ACCIÓN</th>
+		    </tr>
+		  </thead>
+		  <tbody *ngFor="let pregunta of preguntaList">
+		    <tr>
+		      <td>{{ pregunta.CODIGO_PREGUNTA}}</td>
+					<td>{{ pregunta.DESCRIPCION_PREGUNTA}}</td>
+					<td>{{ pregunta.OBSERVACION_PREGUNTA}}</td>
+          <td>{{ pregunta.DESCRIPCION_PARAM_RESPUESTA}}</td>
+          <td>{{ pregunta.ESTADO_PREGUNTA}}</td>
+		      <td>
+							<div *ngIf="confirmado != pregunta.PREGUNTA">
+								<a [routerLink]="['/preguntaEdit', pregunta.PREGUNTA]" class="btn btn-md btn-success">Editar</a>
+								<a (click)="borrarConfirmado(pregunta.PREGUNTA)" class="btn btn-md btn-danger">Eliminar</a>
+							</div>
+							<div *ngIf="confirmado == pregunta.PREGUNTA">
+								<a (click)='preguntaDelete(pregunta.PREGUNTA)' class="btn btn-md btn-danger"> Eliminar</a>
+								<a (click)="cancelarConfirmado()"  class="btn btn-md btn-warning"> Cancelar</a>
+							</div>
+					</td>
+
+		    </tr>
+		  </tbody>
+		</table>
+	</div>
+</div>
