@@ -1,0 +1,49 @@
+<h3>
+	{{tituloParametroList}}
+</h3>
+
+<div *ngIf="!parametroList">
+	Cargando listado de Parametro...
+</div>
+<br>
+<div *ngIf="parametroList">
+	<div>
+		<button type="button" class="btn btn-primary" [routerLink]="['/parametroAdd', tipoParametro.TIPO_PARAMETRO ]">Insertar</button>
+		<button type="button" class="btn btn-md btn-danger" [routerLink]="['/tipoParametroList']">Cancelar</button>
+	</div>
+	<br>
+	<div>
+		<table class="table table-striped table-success" >
+		  <thead>
+		    <tr>
+		      <th scope="col">CÓDIGO</th>
+					<th scope="col">DESCRIPCIÓN</th>
+					<th scope="col">OBSERVACIÓN</th>
+					<th scope="col">ORDEN</th>
+					<th scope="col">ESTADO</th>
+		      <th scope="col">ACCIÓN</th>
+		    </tr>
+		  </thead>
+		  <tbody *ngFor="let parametro of parametroList">
+		    <tr>
+		      <td>{{ parametro.CODIGO}}</td>
+					<td>{{ parametro.DESCRIPCION}}</td>
+					<td>{{ parametro.OBSERVACION}}</td>
+					<td>{{ parametro.ORDEN}}</td>
+					<td>{{ parametro.ESTADO}}</td>
+		      <td>
+							<div *ngIf="confirmado != parametro.PARAMETRO">
+								<a [routerLink]="['/parametroEdit', parametro.PARAMETRO, tipoParametro.DESCRIPCION]" class="btn btn-md btn-success"> Editar</a>
+								<a (click)="borrarConfirmado(parametro.PARAMETRO)" class="btn btn-md btn-danger"> Eliminar</a>
+							</div>
+							<div *ngIf="confirmado == parametro.PARAMETRO">
+								<a (click)='parametroDelete(parametro.PARAMETRO)' class="btn btn-md btn-danger"> Eliminar</a>
+								<a (click)="cancelarConfirmado()"  class="btn btn-md btn-warning"> Cancelar</a>
+							</div>
+					</td>
+
+		    </tr>
+		  </tbody>
+		</table>
+	</div>
+</div>

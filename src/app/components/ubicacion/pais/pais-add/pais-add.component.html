@@ -1,0 +1,28 @@
+<h3>
+	{{ tituloPaisAdd }}
+</h3>
+
+<form #formPais="ngForm" (ngSubmit)="onSubmit()" class="col-lg-6" id="form-pais">
+
+
+
+  <label>
+		Código
+		<span *ngIf="!codigo.valid && codigo.touched" class="label label-danger"> *Campo obligatorio</span>
+	</label>
+	<input type="text" #codigo="ngModel" name="codigo" [(ngModel)]="pais.CODIGO" class="form-control" required />
+
+  <label>
+		Descripción
+		<span *ngIf="!descripcion.valid && descripcion.touched" class="label label-danger"> Campo obligatorio</span>
+	</label>
+	<input type="text" #descripcion="ngModel" name="descripcion" [(ngModel)]="pais.DESCRIPCION" class="form-control" required />
+
+  <br/>
+	<input type="submit" value="Guardar" [disabled]="!formPais.form.valid" class="btn btn-success" />
+
+
+	<button type="button" class="btn btn-danger" [routerLink]="['/paisList']">Cancelar</button>
+
+
+</form>

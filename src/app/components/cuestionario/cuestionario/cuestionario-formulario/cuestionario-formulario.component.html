@@ -1,0 +1,30 @@
+<h3>
+	{{tituloCuestionarioFormularioList}}
+</h3>
+
+<div *ngIf="!cuestionarioList">
+	Cargando listado de Formulario Cuestionario...
+</div>
+<br>
+
+<form #formRespuesta="ngForm" (ngSubmit)="onSubmit()" class="col-lg-6" id="form-respuesta">
+	<div *ngFor="let cuestionario of cuestionarioList">
+
+		<div *ngIf="cuestionario.CODIGO_PARAM_RESPUESTA == campoTXT">
+			<label>
+				{{ cuestionario.DESCRIPCION_PREGUNTA }}
+				<span *ngIf="!pregunta.valid && pregunta.touched" class="label label-danger"> *Campo obligatorio</span>
+			</label>
+			<input type="text" #pregunta="ngModel" name="pregunta" [(ngModel)]="cuestionario.CODIGO" class="form-control" required />
+		</div>
+
+		<div *ngIf="cuestionario.CODIGO_PARAM_RESPUESTA == campoFEC">
+			<label>
+				{{ cuestionario.DESCRIPCION_PREGUNTA }}
+				<span *ngIf="!pregunta.valid && pregunta.touched" class="label label-danger"> *Campo obligatorio</span>
+			</label>
+			<input type="date" #pregunta="ngModel" name="pregunta" [(ngModel)]="cuestionario.CODIGO" class="form-control" required />
+		</div>
+
+	</div>
+</form>

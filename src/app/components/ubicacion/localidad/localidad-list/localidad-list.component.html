@@ -1,0 +1,46 @@
+<h3>
+	{{tituloLocalidadList}}
+</h3>
+
+<div *ngIf="!localidadList">
+	Cargando listado de Localidad...
+</div>
+<br>
+<div *ngIf="localidadList">
+	<div>
+		<button type="button" class="btn btn-primary" [routerLink]="['/localidadAdd', ciudad.CIUDAD ]">Insertar</button>
+		<button type="button" class="btn btn-md btn-danger" [routerLink]="['/ciudadDepartamentoList', ciudad.DEPARTAMENTO]">Cancelar</button>
+	</div>
+	<br>
+	<div>
+		<table class="table table-striped table-success" >
+		  <thead>
+		    <tr>
+		      <th scope="col">ID</th>
+		      <th scope="col">CÓDIGO</th>
+					<th scope="col">DESCRIPCIÓN</th>
+					<th scope="col">ACCIÓN</th>
+		    </tr>
+		  </thead>
+		  <tbody *ngFor="let localidad of localidadList">
+		    <tr>
+		      <th scope="row">{{ localidad.CIUDAD}}</th>
+		      <td>{{ localidad.CODIGO}}</td>
+					<td>{{ localidad.DESCRIPCION}}</td>
+					<td>
+							<div *ngIf="confirmado != localidad.LOCALIDAD">
+								<a [routerLink]="['/localidadEdit', localidad.CIUDAD, ciudad.DESCRIPCION]" class="btn btn-md btn-success"> Editar</a>
+                <a [routerLink]="['/barrioLocalidadList', localidad.LOCALIDAD]" class="btn btn-md btn-warning">Barrios</a>
+								<a (click)="borrarConfirmado(localidad.LOCALIDAD)" class="btn btn-md btn-danger"> Eliminar</a>
+							</div>
+							<div *ngIf="confirmado == localidad.LOCALIDAD">
+								<a (click)='localidadDelete(localidad.LOCALIDAD)' class="btn btn-md btn-danger"> Eliminar</a>
+								<a (click)="cancelarConfirmado()"  class="btn btn-md btn-warning"> Cancelar</a>
+							</div>
+					</td>
+
+		    </tr>
+		  </tbody>
+		</table>
+	</div>
+</div>

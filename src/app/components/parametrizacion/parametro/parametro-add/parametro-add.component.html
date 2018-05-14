@@ -1,0 +1,40 @@
+<h3>
+	{{tituloParametroAdd}}
+</h3>
+
+<form #formParametro="ngForm" (ngSubmit)="onSubmit()" class="col-lg-6" id="form-parametro">
+
+
+
+  <label>
+		Código
+		<span *ngIf="!codigo.valid && codigo.touched" class="label label-danger"> *Campo obligatorio</span>
+	</label>
+	<input type="text" #codigo="ngModel" name="codigo" [(ngModel)]="parametro.CODIGO" class="form-control" required />
+
+  <label>
+		Descripción
+		<span *ngIf="!descripcion.valid && descripcion.touched" class="label label-danger"> Campo obligatorio</span>
+	</label>
+	<input type="text" #descripcion="ngModel" name="descripcion" [(ngModel)]="parametro.DESCRIPCION" class="form-control" required />
+
+  <label>
+		Observación
+		<span *ngIf="!observacion.valid && observacion.touched" class="label label-danger"> Campo obligatorio</span>
+	</label>
+	<input type="text" #observacion="ngModel" name="observacion" [(ngModel)]="parametro.OBSERVACION" class="form-control" required />
+
+  <label>
+		Orden
+		<span *ngIf="!orden.valid && orden.touched" class="label label-danger"> Campo obligatorio</span>
+	</label>
+	<input type="text" #orden="ngModel" name="orden" [(ngModel)]="parametro.ORDEN" class="form-control" required />
+
+  <br/>
+	<input type="submit" value="Guardar" [disabled]="!formParametro.form.valid" class="btn btn-success" />
+
+
+	<button type="button" class="btn btn-danger" [routerLink]="['/parametroIdTipoParametroList', parametro.TIPO_PARAMETRO]">Cancelar</button>
+
+
+</form>

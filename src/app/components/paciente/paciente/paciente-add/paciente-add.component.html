@@ -1,0 +1,29 @@
+<h3>
+	{{ tituloPacienteAdd }}
+</h3>
+
+<form #formPaciente="ngForm" (ngSubmit)="onSubmit()" class="col-lg-6" id="form-paciente">
+  <label>
+		Tipo Identificación
+	</label>
+	<select class="form-control" name="selectParamTipoIdentificacion" [(ngModel)]="paciente.PARAM_TIPO_IDENTIFICACION">
+     <option [ngValue]="null" disabled>--Seleccione--</option>
+     <option *ngFor="let parametro of parametroList" [ngValue]="parametro.PARAMETRO">
+         {{ parametro.DESCRIPCION }}
+     </option>
+	</select>
+
+	<label>
+		Número Identificación
+		<span *ngIf="!numeroIdentificacion.valid && numeroIdentificacion.touched" class="label label-danger"> Campo obligatorio</span>
+	</label>
+	<input type="text" #numeroIdentificacion="ngModel" name="numeroIdentificacion" [(ngModel)]="paciente.NUMERO_IDENTIFICACION" class="form-control" required />
+
+  <br/>
+
+	<app-cuestionario-formulario></app-cuestionario-formulario>
+
+	<input type="submit" value="Guardar" [disabled]="!formPaciente.form.valid" class="btn btn-success" />
+	<button type="button" class="btn btn-danger" [routerLink]="['/pacienteList']">Cancelar</button>
+
+</form>

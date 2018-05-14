@@ -1,0 +1,38 @@
+<h3>
+	{{tituloGrupoPreguntaAdd}}
+</h3>
+
+<form #formGrupoPregunta="ngForm" (ngSubmit)="onSubmit()" class="col-lg-6" id="form-grupoPregunta">
+
+
+
+  <label>
+		Código
+		<span *ngIf="!codigo.valid && codigo.touched" class="label label-danger"> *Campo obligatorio</span>
+	</label>
+	<input type="text" #codigo="ngModel" name="codigo" [(ngModel)]="grupoPregunta.CODIGO" class="form-control" required />
+
+  <label>
+		Pregunta
+	</label>
+	<select class="form-control" name="selectPregunta" [(ngModel)]="grupoPregunta.PREGUNTA">
+     <option [ngValue]="null" disabled>--Seleccione--</option>
+     <option *ngFor="let pregunta of preguntaList" [ngValue]="pregunta.PREGUNTA">
+         {{ pregunta.DESCRIPCION_PREGUNTA }}
+     </option>
+	</select>
+
+  <label>
+		Orden
+		<span *ngIf="!orden.valid && orden.touched" class="label label-danger"> Campo obligatorio</span>
+	</label>
+	<input type="text" #orden="ngModel" name="orden" [(ngModel)]="grupoPregunta.ORDEN" class="form-control" required />
+
+  <br/>
+	<input type="submit" value="Guardar" [disabled]="!formGrupoPregunta.form.valid" class="btn btn-success" />
+
+
+	<button type="button" class="btn btn-danger" [routerLink]="['/grupoPreguntaIdGrupoList', grupoPregunta.GRUPO]">Cancelar</button>
+
+
+</form>
